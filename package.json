@@ -1,0 +1,45 @@
+{
+  "name": "yticapo",
+  "version": "1.0.17",
+  "description": "Opacity Calculator - Calculate opacity values between colors",
+  "main": "index.html",
+  "scripts": {
+    "build": "./build.sh"
+  },
+  "keywords": [
+    "opacity",
+    "color",
+    "calculator",
+    "design",
+    "css"
+  ],
+  "author": "tomippe",
+  "license": "MIT"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

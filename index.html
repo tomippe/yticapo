@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="yticapo - Opacity Calculator. Calculate opacity values between colors. Reverse engineer source colors from target results or forward calculate target colors from source.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>yticapo - Opacity Reverse Calculator</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>opacity</h1>
+            <p>Opacity Reverse Calculator</p>
+        </header>
+
+        <main>
+            <div class="calculator-layout">
+                <!-- Visual Composition Area -->
+                <div class="visual-composition">
+
+                    <!-- Target (Result) -->
+                    <div class="composition-part target-part">
+                        <div class="label-top">Target</div>
+                        <div class="target-visual-wrapper">
+                            <div class="color-box target-box" id="targetBox">
+                                <input type="color" id="targetColorPicker" value="#808080" class="hidden-picker">
+                            </div>
+                        </div>
+                        <input type="text" id="targetColorHex" value="#808080" maxlength="7"
+                            class="hex-input input-bottom">
+                    </div>
+
+                    <!-- Operator & Opacity Group -->
+                    <div class="operator-group">
+                        <div class="operator">=</div>
+                        <div class="opacity-controls-central">
+                            <span id="opacityDisplay">50% of</span>
+                            <input type="range" id="opacityRange" min="1" max="100" value="50">
+                        </div>
+                    </div>
+
+                    <!-- Matte Surrounds Source Group -->
+                    <div class="matte-surround-group">
+                        <!-- Matte Label (Outside Top) -->
+                        <div class="label-matte-top">Matte</div>
+
+                        <!-- Matte Wrapper (Fixed Size) -->
+                        <div class="matte-wrapper">
+                            <!-- Matte Background (Scales on Hover) -->
+                            <div class="matte-background" id="matteBox">
+                                <input type="color" id="matteColorPicker" value="#ffffff" class="hidden-picker">
+                            </div>
+
+                            <!-- Source Content (Interactive) -->
+                            <div class="source-group">
+                                <div class="label-source">Source</div>
+                                <div class="source-box" id="sourceBox">
+                                    <!-- Swapped: Transparent Left, Solid Right -->
+                                    <div class="half-transparent" id="sourceTransparentHalf"></div>
+                                    <div class="half-solid" id="sourceSolidHalf"></div>
+                                    
+                                    <!-- Color Picker for Source (Hidden) -->
+                                    <input type="color" id="sourceColorPicker" value="#000000" class="hidden-picker">
+
+                                    <!-- Error Icon (Hidden by default) -->
+                                    <div id="errorIcon" class="error-icon-overlay">
+                                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path
+                                                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                                            </path>
+                                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="hex-display-group source-hex">
+                                    <span id="sourceColorHex" class="hex-text">#??????</span>
+                                    <input type="text" id="sourceColorHexInput" value="#000000" maxlength="7" 
+                                        class="hex-input source-hex-input" style="display: none;">
+                                    <button id="copyButton" class="icon-btn" title="Copy">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Matte Hex (Outside Bottom) -->
+                        <div class="matte-controls-bottom-outside">
+                            <input type="text" id="matteColorHex" value="#ffffff" maxlength="7" class="hex-input">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+
+</html>
