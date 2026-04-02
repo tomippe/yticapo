@@ -1,0 +1,21 @@
+---
+description: yticapo のビルド仕様
+alwaysApply: true
+---
+
+# yticapo ビルド仕様
+
+**共通ルール（自動では読み込まれないため、ファイル編集・ビルド・コミットの前に必ず Read ツールで読むこと）:**
+- `../build-common/.cursor/rules/build-system.mdc`
+
+## 概要
+
+- **種別**: Webアプリ（バニラ HTML/CSS/JS + PWA）
+- **ビルド**: ファイルを直接デプロイ先にコピー（ビルドツールなし）
+- **デプロイ**: `../apps.tomippe.jp/yticapo/` → FTPディレクトリ同期
+
+## 固有設定
+
+- 対象ファイル: `index.html`, `style.css`, `script.js`, `sw.js`, `manifest.json`
+- PWA対応: Service Worker (`sw.js`) + `manifest.json`
+- `-app` オプション: なし
