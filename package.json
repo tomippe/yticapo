@@ -1,6 +1,6 @@
 {
   "name": "yticapo",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Opacity Calculator - Calculate opacity values between colors",
   "main": "index.html",
   "scripts": {
